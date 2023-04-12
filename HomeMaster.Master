@@ -1,0 +1,432 @@
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeBehind="HomeMaster.master.cs" Inherits="Divya_Darshan.HomeMaster" %>
+
+<!DOCTYPE html>
+
+<html>
+<head runat="server">
+    <title>Divya Darshan</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" />
+    <script type="text/javascript">
+        function alert_logout() {
+            if (Session["user"] != "")
+            {
+                alert("You have been logged out");
+            }
+        }
+    </script>
+    <asp:ContentPlaceHolder ID="head" runat="server">
+    </asp:ContentPlaceHolder>
+    <style type="text/css">
+        .auto-style1 {
+            width: 100%;
+            height: 1260px;
+            border: double;
+            border: solid;
+        }
+
+        .auto-style2 {
+            width:100%;
+            height: 430px;
+            background-color: darkorange;
+        }
+
+        .auto-style3 {
+            height: 96px;
+            background-image: url("https://i.pinimg.com/originals/a2/3b/ec/a23bec39a9ffb0624ea75a54cd30fe02.jpg");
+           
+        }
+
+        .auto-style4 {
+            height: 825px;
+            width: 506px;
+            background-image: url(https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ_auC5oGIVopilabs077U2fM9MbarCr9F3aQ&usqp=CAU);
+            background-size: 310px 825px;            
+        }
+
+        .auto-style6 {
+            height: 58px;
+            background-image: url("https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQo0Sj_LwQplXiUyjaXzrfHDVxN6waGfoJEOWI5__Rqxe_vdVCxAeAzcbtSVQcG2ObONIQ&usqp=CAU");
+            text-align: center;
+        }
+
+        .auto-style7 {
+            height: 825px;
+            width: 94px;
+            background-color: #BEBEBE;
+        }
+
+        .auto-style8 {
+            height: 825px;
+            width: 1084px;
+             background-image:url("https://i.pinimg.com/originals/21/99/37/219937dc0d0380c4c24c9ecdb04aca88.jpg");
+           
+         overflow:auto;
+        }
+
+        .auto-style9 {
+            height: 352px;
+            background-image: url("data:image/jpeg;base64,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");
+            background-size:contain;
+        }
+
+        .auto-style10 {
+            position: absolute;
+            left: 85.9%;
+    top: 50%;
+            height: 275px;
+            width: 200px;
+        }
+
+        .auto-style11 {
+            position: absolute;
+            left: 1%;
+    top: 85%;
+            height: 237px;
+            width: 200px;
+        }
+
+        .auto-style12 {
+            position: absolute;
+            left: 442px;
+            top: 15px;
+            height: 276px;
+            width: 628px;
+        }
+
+        .auto-style13 {
+            position: absolute;
+            left: 15px;
+            top: 15px;
+            width: 425px;
+            height: 275px;
+        }
+
+        .auto-style14 {
+            position: absolute;
+            left: 1074px;
+            top: 16px;
+            width: 426px;
+            height: 273px;
+        }
+
+        .place1 {
+            position: absolute;
+            left: 900px;
+            top: 1320px;
+            width: 250px;
+            height: 70px;
+        }
+
+        .place2 {
+            position: absolute;
+            left: 900px;
+            top: 1450px;
+            width: 250px;
+            height: 70px;
+        }
+
+        .place3 {
+            position: absolute;
+            left: 1230px;
+            top: 1450px;
+            width: 250px;
+            height: 70px;
+        }
+
+        .place4 {
+            position: absolute;
+            left: 1230px;
+            top: 1320px;
+            width: 250px;
+            height: 70px;
+        }
+
+        .flip-cardH {
+            background-color: transparent;
+            height: 70px;
+            width: 200px;
+            left: 100px;
+            perspective: 1000px;
+        }
+
+        .flip-card-innerH {
+            position: relative;
+            text-align: center;
+            transition: transform 0.6s;
+            transform-style: preserve-3d;
+            box-shadow: purple;
+        }
+
+        .flip-cardH:hover .flip-card-innerH {
+            transform: rotateY(180deg);
+        }
+
+        .flip-card-frontH, .flip-card-backH {
+            position: absolute;
+            -webkit-backface-visibility: hidden;
+            backface-visibility: hidden;
+            background-color: black;
+            color: #333333;
+        }
+
+        .flip-card-frontH {
+            background-color: transparent;
+            color: black;
+        }
+
+        .flip-card-backH {
+            background-color: transparent;
+            color: #333333;
+            font-family: "lucida handwriting",cursive;
+            font-size: 9px;
+            transform: rotateY(180deg);
+        }
+
+        .chipH {
+            display: inline-flex;
+            padding: 0 25px;
+            height: 70px;
+            width: 200px;
+            font-size: 22px;
+            line-height: 40px;
+            border-radius: 25px;
+            background-color: transparent;
+            color: #333333;
+            font-family: Britannic;
+            font-weight: bold;
+        }
+
+            .chip imgH {
+                float: left;
+                margin: 0 10px 0 -25px;
+                height: 70px;
+                width: 70px;
+                border-radius: 50%;
+            }
+
+        .auto-style23 {
+            font-size: larger;
+            width: 120px;
+            height: 30px;
+            right: 563px;
+        }
+        .auto-style24 {
+            width: 94px;
+        }
+        .navigation1
+        {
+                color: #990000;
+    background-color: transparent;
+    margin-left: 21px;
+    position: initial;
+    height: 40px;
+    width: 95px;
+     cursor:pointer;
+     font-weight:200;
+          font-family:Times New Roman;
+                Font-Size:22px;
+                border-color:transparent;
+                padding:0px 0px;
+                
+        }
+         .navigation2
+        {
+                color: #990000;
+    background-color: transparent;
+    margin-left: 21px;
+    position: initial;
+    height: 40px;
+    width: 120px;
+     cursor:pointer;
+     font-weight:200;
+          font-family:Times New Roman;
+                Font-Size:22px;
+                border-color:transparent;
+                padding:0px 0px;
+                
+        }
+        .navigation1:hover , .navigation2:hover
+        {
+            background-color:#FF9933;
+        }
+        .nav{
+               margin-left: 180px;
+    display: flex;
+        }
+        .login
+        {
+            background-color:#FF9933  ;
+                border-block-style:groove;
+                position:absolute; 
+                top: 90%;
+    left: 80%;
+                font-weight:200; 
+                 color: #990000;
+                font-family:Times New Roman;
+                Font-Size:X-Large;
+               text-decoration:underline;
+                Height:44px;
+                Width:150px;
+                cursor:pointer;
+        }
+        
+    </style>
+</head>
+<body>
+    <form id="form1" runat="server">
+        <div>
+
+
+            <table class="auto-style1">
+                <tr>
+                    <td class="auto-style2" colspan="3">
+
+                        <asp:Image ID="Image3" runat="server" ImageUrl="~/Images/logo2.JPG" CssClass="auto-style12" />
+                        <asp:Image ID="Image4" runat="server" ImageUrl="~/Images/Temple1.jpg" CssClass="auto-style13" />
+                        <asp:Image ID="Image5" runat="server" ImageUrl="~/Images/Temple4.jpg" CssClass="auto-style14" />
+                    </td>
+                </tr>
+                <tr>
+                    <td class="auto-style3" colspan="3">
+                        <asp:Image ID="Image1" runat="server" ImageUrl="~/Images/Menu_left.png" CssClass="auto-style10" />
+                        
+                            <div class="nav">
+                            <asp:Button ID="btnHome" runat="server" Text="HOME" class="navigation1" OnClick="btnHome_Click1"  />
+                            <asp:Button ID="btnTemple" runat="server" Text="TEMPLE" class="navigation1" OnClick="btnTemple_Click"/>
+                            <asp:Button ID="btnNgo" runat="server" Text="NGO" class="navigation1" OnClick="btnNgo_Click" />
+                            <asp:Button ID="btnLocation" runat="server"  Text="LOCATION" class="navigation2" OnClick="btnLocation_Click"  />
+                            <asp:Button ID="btnAbout" runat="server"   Text="ABOUT US " class="navigation2" OnClick="btnAbout_Click" />
+                            <asp:Button ID="btnSignIn" runat="server" class="login" Text="LOGIN" OnClientClick="alert_logout()" OnClick="btnSignIn_Click" />
+                            <asp:Button ID="btnDonation" runat="server"  Text="DONATION" class="navigation2" OnClick="btnDonation_Click" />
+                            <asp:Image ID="Image2" runat="server" ImageUrl="~/Images/Menu_top.png" CssClass="auto-style11" />
+
+                            </div>
+
+                        
+                    </td>
+                </tr>
+                <tr>
+                    <td class="auto-style7">
+                        <asp:Label ID="Label9" runat="server" Height="125px" Text="Contact us for Adds" Width="72px"></asp:Label>
+                    </td>
+                    <td class="auto-style8">
+
+                        <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server">
+                        </asp:ContentPlaceHolder>
+
+
+                    </td>
+                    <td class="auto-style4">
+                        <asp:TextBox ID="TextBox1" runat="server" Style="position: absolute; left: 1204px; top: 483px; height: 30px; width: 15%;">List </asp:TextBox>
+
+                        <asp:ImageButton ID="ImageButton5" ImageUrl="https://cdn0.iconfinder.com/data/icons/very-basic-2-android-l-lollipop-icon-pack/24/search-512.png" Style="position: absolute; left: 1438px; top: 477px; height: 58px;" runat="server" />
+                        <asp:TextBox ID="TextBox2" runat="server" Style="position: absolute; left: 1204px; top: 620px; height: 30px; width: 224px;"></asp:TextBox>
+                        <asp:TextBox ID="TextBox3" runat="server" Style="position: absolute; left: 1204px; top: 680px; height: 30px; width: 224px;"></asp:TextBox>
+                        <asp:Label ID="Label8" runat="server" Style="position: absolute; left: 1204px; top: 560px; height: 30px; width: 224px;"></asp:Label>
+
+                        <asp:GridView ID="GridView1" runat="server" Style="position: absolute; left: 1204px; top: 730px;">
+                        </asp:GridView>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="auto-style9" colspan="3">
+                        <asp:Label ID="Label2" runat="server" Font-Bold="True" Font-Names="Britannic Bold" Font-Size="Larger" ForeColor="Black" Style="position: absolute; left: 100px; top: 1250px;" Text="CONTACT US "></asp:Label>
+                        <asp:Image ID="Image7" runat="server" Style="position: absolute; top: 1376px; left: 57px" BorderColor="White" BorderStyle="None" Height="200px" ImageUrl="~/Images/curved logo1.png" />
+                        <asp:Label ID="Label3" runat="server" Font-Bold="True" Font-Names="Britannic Bold" Font-Size="Medium" ForeColor="#333333" Style="position: absolute; left: 100px; top: 1300px;" Text="Phone (Ph. )    :  99XXXXXX54"></asp:Label>
+                        <asp:Label ID="Label4" runat="server" Text="E-mail  :  DivyDarshan@gmail.com" Font-Bold="True" Font-Names="Britannic Bold" Font-Size="Large" ForeColor="#333333" Style="position: absolute; left: 100px; top: 1360px;"></asp:Label>
+                        <asp:Label ID="Label5" runat="server" Font-Bold="True" Font-Names="Britannic Bold" Font-Size="Medium" Text="99XXXXXX82" Style="position: absolute; left: 197px; top: 1330px;" ForeColor="#333333"></asp:Label>
+                        <asp:Label ID="Label6" runat="server" CssClass="auto-style23" Font-Bold="True" Font-Names="Britannic Bold" Font-Size="Larger" ForeColor="Black" Text="FOLLOW US " Style="position: absolute; left: 600px; top: 1250px;" Font-Italic="False"></asp:Label>
+                        <asp:Label ID="Label7" runat="server" Font-Bold="True" Font-Names="Britannic Bold" Font-Size="Larger" ForeColor="Black" Text="TEAM" Style="position: absolute; left: 1140px; top: 1250px;"></asp:Label>
+                        <asp:ImageButton ID="ImageButton1" runat="server" ImageUrl="https://www.freeiconspng.com/thumbs/youtube-logo-png/hd-youtube-logo-png-transparent-background-20.png" Style="position: absolute; left: 550px; top: 1296px; height: 91px; width: 86px;" />
+                        <asp:ImageButton ID="ImageButton2" runat="server" ImageUrl="http://assets.stickpng.com/thumbs/584ac2d03ac3a570f94a666d.png" Style="position: absolute; left: 705px; top: 1306px; height: 65px; width: 67px;" />
+                        <asp:ImageButton ID="ImageButton3" runat="server" ImageUrl="https://assets.stickpng.com/images/580b57fcd9996e24bc43c52e.png" Style="position: absolute; left: 560px; top: 1400px; height: 75px; width: 75px;" />
+                        <asp:ImageButton ID="ImageButton4" runat="server" ImageUrl="http://assets.stickpng.com/images/580b57fcd9996e24bc43c521.png" Style="position: absolute; left: 705px; top: 1400px; height: 75px; width: 75px;" />
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="auto-style24">
+                        <div class="place1">
+                            <div class="flip-cardH">
+                                <div class="flip-card-innerH">
+                                    <div class="flip-card-frontH">
+
+                                        <div class="chipH">
+                                            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT8OJ-zP363wkxMjd5AhIECl1fA3ngG6vyS1MYT8U8MNuMMvH2qmVj0fhiBJYFZcIwf5UM&usqp=CAU" alt="Person" width="100" height="100" />
+                                            Priyanshi Pal
+                                        </div>
+                                    </div>
+                                    <div class="flip-card-backH">
+                                        <h1>9952XXXXXX<br />
+                                            priya_123@gmail.com</h1>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="place2">
+                            <div class="flip-cardH">
+                                <div class="flip-card-innerH">
+                                    <div class="flip-card-frontH">
+
+                                        <div class="chipH">
+                                            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQEI6G4BLc75gHp9OVjCtr534K8nM_RYL5K6HM6Fzn15VpW97upLM3ZaGGugTqeL5QgFa8&usqp=CAU" alt="Person" width="100" height="100" />
+                                            Avantika Pandey
+                                        </div>
+                                    </div>
+                                    <div class="flip-card-backH">
+                                        <h1>9952XXXXXX<br />
+                                            Avantika_123@gmail.com</h1>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="place3">
+                            <div class="flip-cardH">
+                                <div class="flip-card-innerH">
+                                    <div class="flip-card-frontH">
+
+                                        <div class="chipH">
+                                            <img src="https://cdn-icons-png.flaticon.com/512/146/146025.png" alt="Person" width="100" height="100" />
+                                            Khushi Gupta
+                                        </div>
+                                    </div>
+                                    <div class="flip-card-backH">
+                                        <h1>9952XXXXXX<br />
+                                            Khushi_123@gmail.com</h1>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="place4">
+                            <div class="flip-cardH">
+                                <div class="flip-card-innerH">
+                                    <div class="flip-card-frontH">
+
+                                        <div class="chipH">
+                                            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQhCl51yRwlA5dhspiRvbRXhkpdMX38KWY9UDPxOdTLSwW7c0WNy_C0TtiOZi96saSr8C8&usqp=CAU" alt="Person" width="100" height="100" />
+                                            Laveena Tanwani
+                                        </div>
+                                    </div>
+                                    <div class="flip-card-backH">
+                                        <h1>9952XXXXXX<br />
+                                            Laveena_123@gmail.com</h1>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="auto-style6" colspan="3">
+                        <asp:Label ID="Label1" runat="server" Font-Bold="True" Font-Italic="True" Font-Names="Times New Roman" Font-Size="XX-Large" Font-Underline="True" Text="Copyright &copy 2022 KALP Developers"></asp:Label>
+                    </td>
+                </tr>
+            </table>
+
+
+        </div>
+    </form>
+</body>
+</html>
